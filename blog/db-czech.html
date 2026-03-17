@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DB Ticketing Tricks – Simon Röhrl</title>
+  <link rel="stylesheet" href="../dist/output.css">
+  <style>
+    /* Language toggle pill */
+    .lang-toggle {
+      position: relative;
+      display: inline-flex;
+      background: #e5e7eb;
+      border-radius: 9999px;
+      padding: 3px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .lang-toggle span {
+      position: relative;
+      z-index: 1;
+      padding: 4px 14px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border-radius: 9999px;
+      transition: color 0.2s;
+      color: #6b7280;
+    }
+    .lang-toggle span.active {
+      color: #111827;
+    }
+    .lang-toggle .slider {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: calc(50% - 3px);
+      height: calc(100% - 6px);
+      background: #fff;
+      border-radius: 9999px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .lang-toggle.en .slider {
+      transform: translateX(100%);
+    }
+
+    /* Blog article typography */
+    article a {
+      color: #2563eb;
+      text-decoration: underline;
+      text-decoration-color: #93c5fd;
+      text-underline-offset: 2px;
+      transition: text-decoration-color 0.15s;
+    }
+    article a:hover {
+      text-decoration-color: #2563eb;
+    }
+    article h2 {
+      margin-top: 2.25rem;
+      margin-bottom: 0.75rem;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #111827;
+      letter-spacing: -0.01em;
+    }
+    article p {
+      margin-bottom: 1.15rem;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #374151;
+    }
+    article ul {
+      margin-bottom: 1rem;
+      padding-left: 1.5rem;
+      list-style: disc;
+    }
+    article ul li {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #374151;
+      margin-bottom: 0.2rem;
+    }
+    article .intro {
+      font-size: 1.12rem;
+      line-height: 1.85;
+      color: #4b5563;
+      margin-bottom: 1.5rem;
+    }
+    article .callout {
+      background: #f0f9ff;
+      border-left: 3px solid #3b82f6;
+      padding: 0.85rem 1.15rem;
+      border-radius: 0 0.5rem 0.5rem 0;
+      margin-bottom: 1.25rem;
+    }
+    article .callout p {
+      margin-bottom: 0;
+      font-size: 0.95rem;
+      color: #1e40af;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gray-50 text-gray-900 antialiased">
+
+  <div class="max-w-4xl mx-auto px-6 py-12">
+
+    <!-- Nav -->
+    <nav class="flex items-center justify-between mb-8">
+      <a href="/" class="text-sm text-gray-400 hover:text-gray-700 transition">&larr; Back</a>
+      <div class="lang-toggle" id="lang-toggle" onclick="toggleLang()" role="button" tabindex="0" aria-label="Switch language">
+        <div class="slider"></div>
+        <span id="label-de" class="active">DE</span>
+        <span id="label-en">EN</span>
+      </div>
+    </nav>
+
+    <!-- Hero image -->
+    <figure class="mb-8">
+      <img
+        src="assets/db-train.jpg"
+        alt="DB Regio train on tracks"
+        class="w-full rounded-xl object-cover"
+        style="max-height: 380px;"
+      >
+      <figcaption class="text-xs text-gray-400 mt-2 px-6 sm:px-8 md:px-12">
+        Photo by <a href="https://unsplash.com/@markusspiske" target="_blank" rel="noopener noreferrer" class="hover:text-gray-500">Markus Spiske</a> on <a href="https://unsplash.com/photos/VpkjfZqNlHg" target="_blank" rel="noopener noreferrer" class="hover:text-gray-500">Unsplash</a>
+      </figcaption>
+    </figure>
+
+    <!-- Header -->
+    <header class="mb-10">
+      <h1 class="text-4xl font-bold tracking-tight mb-3" id="title-de">Günstig unterwegs mit der Deutschen Bahn dank tschechischer Tickets</h1>
+      <h1 class="text-4xl font-bold tracking-tight mb-3 hidden" id="title-en">Traveling Cheap on German Trains with Czech Tickets</h1>
+      <p class="text-sm text-gray-400" id="meta-de">März 2025 &middot; <span id="reading-time-de"></span></p>
+      <p class="text-sm text-gray-400 hidden" id="meta-en">March 2025 &middot; <span id="reading-time-en"></span></p>
+    </header>
+
+    <!-- DE -->
+    <article id="content-de">
+
+      <p class="intro">
+        Wer regelmäßig mit der Bahn fährt, kennt das Problem: Die Preise sind oft undurchsichtig und 
+        man zahlt mehr als nötig. Die DB Navigator App hilft nur begrenzt weiter.
+        Bei einem Kurztrip nach Prag habe ich ein paar Tricks gesammelt.
+        Hier teile ich meine Erfahrungen.
+      </p>
+
+      <h2>Das Prag-Spezial Ticket</h2>
+      <p>
+        Der einfachste Weg von Regensburg nach Prag ist das
+        <a href="https://www.bahn.de/angebot/regio/bayern/prag-spezial" target="_blank" rel="noopener noreferrer">Prag-Spezial Ticket</a>
+        der Deutschen Bahn. Für 65&thinsp;€ kommt man damit von Regensburg nach Prag und zurück. Das ist allerdings nicht der
+        günstigste Weg, aber unkompliziert und direkt über die DB Navigator App buchbar. Allerdings gibt es auch hier Tücken, wenn man zum
+        Beispiel von einem anderen Bahnhof als Regensburg losfährt. Wenn man zum Beispiel von Schwandorf startet, wird das Prag-Spezial nicht direkt in der App angezeigt.
+        Man sollte dann einfach die Verbindung Regensburg → Prag suchen, das Prag-Spezial Ticket auswählen und dann trotzdem einfach in Schwandorf einsteigen. Das funktioniert problemlos.
+      </p>
+      <p>
+        Wer bereit ist, etwas mehr Aufwand zu investieren, kann den Preis aber noch deutlich drücken.
+      </p>
+
+      <h2>Direkt bei der tschechischen Bahn buchen</h2>
+      <p>
+        Einer der besten Tipps überhaupt: Wer im Voraus direkt bei der <a href="https://www.cd.cz/" target="_blank" rel="noopener noreferrer">tschechischen Bahn (ČD)</a> bucht,
+        zahlt oft nur rund 15&thinsp;€ pro Strecke. Hin und zurück sind das etwa 30&thinsp;€ — weniger
+        als die Hälfte des Prag-Spezial Tickets. Zusätzlich bekommt man noch eine Sitzplatzreservierung inklusive, was nicht im Prag-Spezial enthalten ist.
+        Allerdings gibt es auch einen Nachteil. Mit dem Prag-Spezial ist man flexibler unterwegs, da keine Zugbindung besteht.
+      </p>
+      <p>
+        Die Buchung läuft über die ČD-Website oder App, und die Tickets sind problemlos digital nutzbar.
+        Es lohnt sich, früh zu buchen, da die Preise meist steigen, je näher der Reisetag rückt.
+      </p>
+
+      <h2>Der Teilstrecken-Trick</h2>
+      <p>
+        Manchmal wenn man nicht rechtzeitig bucht, ist es günstiger, die Fahrt in einzelne Abschnitte aufzuteilen statt die Gesamtstrecke
+        am Stück zu buchen. Denn während die Gesamtstrecke starken Preisschwankungen unterliegt, bleiben die Teilstrecken oft konstant im Preis und können daher bei Spontanbuchungen, wenn die Gesamtstrecke schon teuer geworden ist, eine günstigere Alternative sein.
+        Zum Beispiel wollte ich von Schwandorf nach Prag, und die direkte Verbindung war recht teuer. Bei der Aufteilung bekam ich günstigere Preise:
+      </p>
+      <ul>
+        <li>Schwandorf → Domažlice</li>
+        <li>Domažlice → Praha</li>
+      </ul>
+      <div class="callout">
+        <p>
+          <strong>Wichtig:</strong> Jede Teilstrecke muss mindestens einen tschechischen
+          Bahnhof enthalten, damit die günstigeren tschechischen Tarife greifen.
+        </p>
+      </div>
+
+      <h2>Hidden City Ticketing</h2>
+      <p>
+        Diesen Trick kennt man eigentlich aus der Luftfahrt: Man bucht eine längere Strecke,
+        steigt aber schon vorher aus. Bei der Bahn funktioniert das genauso.
+      </p>
+      <p>
+        Angenommen man will von Schwandorf nach Cham, dann kann ein Ticket von Schwandorf nach Domažlice günstiger sein als eines nur
+        bis Cham, obwohl Cham auf dem Weg liegt. Das funktioniert deswegen, da man durch den tschechischen Zielbahnhof in den Genuss der günstigeren tschechischen Tarife gelangt. 
+        Man bucht also die längere Strecke und steigt einfach früher aus.
+        Kein Mehraufwand, aber oft ein paar Euro gespart.
+      </p>
+
+      <h2>Tool-Tipp für innerdeutsche Strecken: BetterBahn</h2>
+      <p>
+        Obige Tricks entstehen durch den internationalen Kontext. Für innerdeutsche Strecken, bei denen ähnliche Tricks zur Verwendung kommen, gibt es eine Lösung. Wer keine Lust hat, das alles manuell durchzuprobieren: Das Tool
+        <a href="https://betterbahn.eu/" target="_blank" rel="noopener noreferrer">BetterBahn</a>
+        (<a href="https://github.com/betterbahn" target="_blank" rel="noopener noreferrer">GitHub</a>)
+        automatisiert genau das. Es nutzt den
+        <a href="https://github.com/public-transport/db-vendo-client" target="_blank" rel="noopener noreferrer">db-vendo-client</a>,
+        um automatisch Teilstrecken-Kombinationen durchzurechnen und die günstigste Variante zu finden.
+      </p>
+
+      <h2>Internationaler Tipp: Seat 61</h2>
+      <p>
+        Wer nicht nur nach Prag, sondern generell mit dem Zug durch Europa reisen will, sollte sich
+        <a href="https://www.seat61.com/" target="_blank" rel="noopener noreferrer">Seat 61</a> anschauen.
+        Die Seite ist ein echter Geheimtipp — mit vielen Praxis- und Buchungstipps für viele Verbindungen in Europa.
+      </p>
+
+    </article>
+
+    <!-- EN -->
+    <article id="content-en" class="hidden">
+
+      <p class="intro">
+        If you regularly travel by train, you know the problem: prices are often opaque and
+        you end up paying more than necessary. The DB Navigator app is only of limited help.
+        On a short trip to Prague, I picked up a few tricks. Here's what I've learned.
+      </p>
+
+      <h2>The Prague Special Ticket</h2>
+      <p>
+        The simplest way from Regensburg to Prague is the
+        <a href="https://www.bahn.de/angebot/regio/bayern/prag-spezial" target="_blank" rel="noopener noreferrer">Prague Special Ticket</a>
+        from Deutsche Bahn. For €65 you get a return ticket from Regensburg to Prague. It's not the
+        cheapest option, but it's straightforward and bookable directly via the DB Navigator app.
+        There's a catch, though: if you're departing from a different station, say Schwandorf, the
+        Prague Special won't show up directly in the app. The workaround is simple — search for the
+        Regensburg → Prague connection, select the Prague Special, and just board at Schwandorf anyway.
+        It works without any issues.
+      </p>
+      <p>
+        If you're willing to put in a bit more effort, you can bring the price down significantly.
+      </p>
+
+      <h2>Book directly with Czech Railways</h2>
+      <p>
+        One of the best tips overall: if you book in advance directly with <a href="https://www.cd.cz/" target="_blank" rel="noopener noreferrer">Czech Railways (ČD)</a>,
+        you often pay only around €15 per leg. That's about €30 return — less than half the
+        Prague Special price. On top of that, you get a seat reservation included, which is not
+        part of the Prague Special. The downside: the Prague Special offers more flexibility since
+        there's no train binding.
+      </p>
+      <p>
+        Booking works through the ČD website or app, and the tickets are fully usable digitally.
+        It pays to book early, as prices tend to rise the closer you get to the travel date.
+      </p>
+
+      <h2>The Split-Ticketing Trick</h2>
+      <p>
+        If you didn't book early enough, it can sometimes be cheaper to split the journey into
+        separate legs rather than booking the whole route at once. The overall route is subject
+        to strong price fluctuations, while individual segments often stay constant in price.
+        So for last-minute bookings when the full route has already become expensive, splitting
+        can be a cheaper alternative. For example, I wanted to go from Schwandorf to Prague and
+        the direct connection was quite pricey. Splitting it up gave me better prices:
+      </p>
+      <ul>
+        <li>Schwandorf → Domažlice</li>
+        <li>Domažlice → Praha</li>
+      </ul>
+      <div class="callout">
+        <p>
+          <strong>Important:</strong> Each leg must include at least one Czech station
+          so that the cheaper Czech fares apply.
+        </p>
+      </div>
+
+      <h2>Hidden City Ticketing</h2>
+      <p>
+        This trick is well known from the airline world: you book a longer route but get off
+        at an earlier stop. It works just the same with trains.
+      </p>
+      <p>
+        Say you want to go from Schwandorf to Cham — a ticket from Schwandorf to Domažlice can
+        actually be cheaper than one just to Cham, even though Cham is on the way. This works
+        because the Czech destination station triggers the cheaper Czech fare structure.
+        So you book the longer route and simply get off earlier.
+        No extra effort, but often a few euros saved.
+      </p>
+
+      <h2>Tool Tip for Routes within Germany: BetterBahn</h2>
+      <p>
+        The tricks above arise from the international context. For routes within Germany, where
+        similar tricks apply, there's a solution. If you don't feel like trying it all manually:
+        the tool
+        <a href="https://betterbahn.eu/" target="_blank" rel="noopener noreferrer">BetterBahn</a>
+        (<a href="https://github.com/betterbahn" target="_blank" rel="noopener noreferrer">GitHub</a>)
+        automates exactly this. It uses the
+        <a href="https://github.com/public-transport/db-vendo-client" target="_blank" rel="noopener noreferrer">db-vendo-client</a>
+        to automatically calculate split-ticket combinations and find the cheapest option.
+      </p>
+
+      <h2>International Tip: Seat 61</h2>
+      <p>
+        If you're interested in train travel beyond just Prague,
+        <a href="https://www.seat61.com/" target="_blank" rel="noopener noreferrer">Seat 61</a> is a real hidden gem — packed with practical advice and booking tips for many rail connections across Europe.
+      </p>
+
+    </article>
+
+  </div>
+
+  <script>
+    function toggleLang() {
+      var toggle = document.getElementById('lang-toggle');
+      var isDE = !toggle.classList.contains('en');
+
+      toggle.classList.toggle('en', isDE);
+      document.getElementById('label-de').classList.toggle('active', !isDE);
+      document.getElementById('label-en').classList.toggle('active', isDE);
+
+      document.getElementById('content-de').classList.toggle('hidden', isDE);
+      document.getElementById('content-en').classList.toggle('hidden', !isDE);
+      document.getElementById('title-de').classList.toggle('hidden', isDE);
+      document.getElementById('title-en').classList.toggle('hidden', !isDE);
+      document.getElementById('meta-de').classList.toggle('hidden', isDE);
+      document.getElementById('meta-en').classList.toggle('hidden', !isDE);
+
+      document.documentElement.lang = isDE ? 'en' : 'de';
+    }
+
+    function calcReadingTime() {
+      var wpmDe = 200, wpmEn = 238;
+      var deTxt = document.getElementById('content-de').textContent;
+      var enTxt = document.getElementById('content-en').textContent;
+      var deWords = deTxt.trim().split(/\s+/).length;
+      var enWords = enTxt.trim().split(/\s+/).length;
+      var deMin = Math.max(1, Math.round(deWords / wpmDe));
+      var enMin = Math.max(1, Math.round(enWords / wpmEn));
+      document.getElementById('reading-time-de').textContent = deMin + ' min Lesezeit';
+      document.getElementById('reading-time-en').textContent = enMin + ' min read';
+    }
+    calcReadingTime();
+
+    document.getElementById('lang-toggle').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleLang();
+      }
+    });
+  </script>
+</body>
+</html>
