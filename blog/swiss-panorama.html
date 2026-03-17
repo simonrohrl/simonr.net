@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Günstig mit dem Panoramazug durch die Schweiz – Simon Röhrl</title>
+  <link rel="stylesheet" href="../dist/output.css">
+  <style>
+    /* Language toggle pill */
+    .lang-toggle {
+      position: relative;
+      display: inline-flex;
+      background: #e5e7eb;
+      border-radius: 9999px;
+      padding: 3px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .lang-toggle span {
+      position: relative;
+      z-index: 1;
+      padding: 4px 14px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border-radius: 9999px;
+      transition: color 0.2s;
+      color: #6b7280;
+    }
+    .lang-toggle span.active {
+      color: #111827;
+    }
+    .lang-toggle .slider {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: calc(50% - 3px);
+      height: calc(100% - 6px);
+      background: #fff;
+      border-radius: 9999px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .lang-toggle.en .slider {
+      transform: translateX(100%);
+    }
+
+    /* Blog article typography */
+    article a {
+      color: #2563eb;
+      text-decoration: underline;
+      text-decoration-color: #93c5fd;
+      text-underline-offset: 2px;
+      transition: text-decoration-color 0.15s;
+    }
+    article a:hover {
+      text-decoration-color: #2563eb;
+    }
+    article h2 {
+      margin-top: 2.25rem;
+      margin-bottom: 0.75rem;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #111827;
+      letter-spacing: -0.01em;
+    }
+    article p {
+      margin-bottom: 1.15rem;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #374151;
+    }
+    article ul {
+      margin-bottom: 1rem;
+      padding-left: 1.5rem;
+      list-style: disc;
+    }
+    article ul li {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #374151;
+      margin-bottom: 0.2rem;
+    }
+    article .intro {
+      font-size: 1.12rem;
+      line-height: 1.85;
+      color: #4b5563;
+      margin-bottom: 1.5rem;
+    }
+    article .callout {
+      background: #f0f9ff;
+      border-left: 3px solid #3b82f6;
+      padding: 0.85rem 1.15rem;
+      border-radius: 0 0.5rem 0.5rem 0;
+      margin-bottom: 1.25rem;
+    }
+    article .callout p {
+      margin-bottom: 0;
+      font-size: 0.95rem;
+      color: #1e40af;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gray-50 text-gray-900 antialiased">
+
+  <div class="max-w-4xl mx-auto px-6 py-12">
+
+    <!-- Nav -->
+    <nav class="flex items-center justify-between mb-8">
+      <a href="/" class="text-sm text-gray-400 hover:text-gray-700 transition">&larr; Back</a>
+      <div class="lang-toggle" id="lang-toggle" onclick="toggleLang()" role="button" tabindex="0" aria-label="Switch language">
+        <div class="slider"></div>
+        <span id="label-de" class="active">DE</span>
+        <span id="label-en">EN</span>
+      </div>
+    </nav>
+
+    <!-- Draft banner -->
+    <div class="mb-6 px-4 py-3 bg-orange-500 text-white text-center font-bold text-lg uppercase tracking-wide rounded-lg">
+      Entwurf / Draft
+    </div>
+
+    <!-- Hero image -->
+    <figure class="mb-8">
+      <img
+        src="assets/swiss-panorama.jpg"
+        alt="Roter Schweizer Zug vor verschneiten Alpen"
+        class="w-full rounded-xl object-cover"
+        style="max-height: 380px;"
+      >
+      <figcaption class="text-xs text-gray-400 mt-2 px-6 sm:px-8 md:px-12">
+        Photo by <a href="https://unsplash.com/@goodguyale" target="_blank" rel="noopener noreferrer" class="hover:text-gray-500">Ale</a> on <a href="https://unsplash.com/photos/yQMHMbitArA" target="_blank" rel="noopener noreferrer" class="hover:text-gray-500">Unsplash</a>
+      </figcaption>
+    </figure>
+
+    <!-- Header -->
+    <header class="mb-10">
+      <h1 class="text-4xl font-bold tracking-tight mb-3" id="title-de">Günstig mit dem Panoramazug durch die Schweiz</h1>
+      <h1 class="text-4xl font-bold tracking-tight mb-3 hidden" id="title-en">Traveling Cheap on Swiss Panoramic Trains</h1>
+      <p class="text-sm text-gray-400" id="meta-de">März 2026 &middot; <span id="reading-time-de"></span></p>
+      <p class="text-sm text-gray-400 hidden" id="meta-en">March 2026 &middot; <span id="reading-time-en"></span></p>
+    </header>
+
+    <!-- DE -->
+    <article id="content-de">
+
+      <p class="intro">
+        Die Schweizer Panoramazüge gehören zu den spektakulärsten Bahnstrecken der Welt. Aber die Tickets
+        sind oft erschreckend teuer. Mit ein paar Tricks lässt sich die gleiche Aussicht für einen Bruchteil
+        des Preises genießen.
+      </p>
+
+      <h2>Die Panoramastrecken im Überblick</h2>
+      <p>
+        Die Schweiz hat mehrere berühmte
+        <a href="https://www.myswitzerland.com/en-ae/experiences/experience-tour/highlights-by-train-bus-and-boat/panoramic-routes/" target="_blank" rel="noopener noreferrer">Panoramastrecken</a>,
+        die jedes Jahr zahlreiche Touristen anlocken:
+      </p>
+      <ul>
+        <li><strong>GoldenPass Express</strong> — Montreux–Interlaken</li>
+        <li><strong>Luzern-Interlaken Express</strong> — Interlaken–Luzern</li>
+        <li><strong>Gotthard Panorama Express</strong> — Luzern–Lugano</li>
+        <li><strong>Bernina Express</strong> — Tirano–St.&thinsp;Moritz</li>
+        <li><strong>Glacier Express</strong> — St.&thinsp;Moritz–Zermatt</li>
+      </ul>
+      <p>
+        Fährt man diese Strecken in obiger Reihenfolge, nutzt zwischen Lugano und Tirano den
+        <a href="https://www.myswitzerland.com/en/planning/offers/bernina-express-bus-ticket-from-lugano-or-tirano/" target="_blank" rel="noopener noreferrer">Bernina Express Bus</a>
+        und kehrt von Zermatt über die
+        <a href="https://www.myswitzerland.com/de-ch/erlebnisse/erlebnisfahrten/bahn-bus-schiff-grand-train-tour/grand-train-tour-of-switzerland/etappen-der-grand-train-tour/grand-train-tour-montreux-visp-zermatt/" target="_blank" rel="noopener noreferrer">Strecke Zermatt–Visp–Montreux</a>
+        zurück, ergibt sich die komplette Rundtour: die
+        <strong>Grand Train Tour of Switzerland</strong> — fahrbar in beide Richtungen. Natürlich muss man nicht die ganze Rundtour machen, sondern kann sich auch einzelne Abschnitte rauspicken oder Abstecher zu anderen schönen Orten in der Schweiz machen (z.B. Jungfraujoch).
+      </p>
+      <h2>Das Preissystem verstehen</h2>
+      <p>
+        Bei den Schweizer Panoramazügen setzt sich der Preis in der Regel aus zwei Teilen zusammen:
+        dem <strong>Fahrausweis</strong> (Ticket, Tageskarte oder Pass) und der
+        <strong>Sitzplatzreservierung</strong>. Beides wird separat bezahlt. Der Fahrausweis berechtigt
+        zur Nutzung der Strecke, die Reservation sichert einen Sitzplatz im Panoramawagen.
+        Ohne gültigen Fahrausweis nützt die Reservation nichts — und ohne Reservation darf man
+        bei manchen Zügen (z.&thinsp;B. Glacier Express) gar nicht einsteigen.
+      </p>
+      <p>
+        Daraus ergeben sich zwei Sparhebel: Erstens kann man beim <strong>Fahrausweis</strong> sparen,
+        indem man statt teurer Einzeltickets günstige Tageskarten, Pässe oder Sparangebote nutzt.
+        Zweitens kann man die <strong>Reservierungskosten komplett vermeiden</strong>, indem man
+        Regionalzüge nimmt, die dieselben Strecken ohne Reservierungspflicht befahren.
+      </p>
+
+      <h2>Trick 1: Regionalzüge auf denselben Strecken</h2>
+      <p>
+        Die berühmten Panoramastrecken werden nicht nur von den teuren
+        Panoramazügen befahren, sondern auch von ganz normalen Regionalzügen — auf exakt denselben
+        Gleisen, mit derselben Aussicht — auch wenn die Panoramawagen größere Fenster haben,
+        bieten die Regionalzüge dafür oft Fenster zum Öffnen.
+      </p>
+      <p>
+        Bestes Beispiel: Die <strong>Bernina-Strecke</strong> (Tirano–St.&thinsp;Moritz) wird stündlich
+        von RhB-Regionalzügen (Allegra-Triebwagen) bedient — ohne Umsteigen, ohne Reservation, und
+        man kann sogar die Fenster öffnen. Auf anderen Panoramastrecken wie dem Glacier Express oder
+        GoldenPass fahren ebenfalls Regionalzüge, dort sind allerdings oft mehrere Umstiege nötig.
+      </p>
+
+      <h2>Die Halbtax-Karte</h2>
+      <p>
+        Das Schweizer Halbtax-Abo ist Gold wert: 50&thinsp;% Rabatt auf fast alle Züge, Busse und
+        Schiffe in der Schweiz. Für Touristen gibt es die
+        <a href="https://www.sbb.ch/de/abos-billette/abonnemente/halbtax.html" target="_blank" rel="noopener noreferrer"><strong>Swiss Half Fare Card</strong></a>
+        als Monatsvariante für CHF&thinsp;150 (nur für Personen mit Wohnsitz außerhalb CH/FL).
+        Schweizer Einwohner zahlen CHF&thinsp;185 für das <strong>Jahresabo</strong>. Das Halbtax lässt
+        sich perfekt mit anderen Sparangeboten kombinieren.
+      </p>
+      <p>
+        Die beste Combo: <strong>Halbtax + Spartageskarte ab CHF&thinsp;29 pro Tag</strong> — damit fährt
+        man einen ganzen Tag lang unbegrenzt durch die Schweiz. Die Spartageskarte sollte man frühzeitig
+        buchen, um an die günstigsten Preise zu kommen.
+      </p>
+
+      <h2>SBB Spartageskarte & Sparbillette</h2>
+      <p>
+        Die <a href="https://www.sbb.ch/de/freizeit-ferien/reisen-schweiz/spartageskarte.html" target="_blank" rel="noopener noreferrer">Spartageskarte</a>
+        ist das Schweizer Äquivalent zum deutschen Deutschlandticket-Tagesmodus: ein Tag,
+        unbegrenzt reisen, ab CHF&thinsp;52 (ab CHF&thinsp;29 mit Halbtax).
+      </p>
+      <p>
+        Zusätzlich gibt es <a href="https://www.sbb.ch/de/kaufen/pages/offer/sparbillette.xhtml" target="_blank" rel="noopener noreferrer">Sparbillette</a>:
+        15–50&thinsp;% Rabatt auf Punkt-zu-Punkt-Tickets, je früher man bucht, desto günstiger.
+      </p>
+      <p>
+        <strong>Rechenbeispiel Glacier Express:</strong> Spartageskarte CHF&thinsp;52 + Reservation
+        CHF&thinsp;54 = CHF&thinsp;106 — statt CHF&thinsp;213 zum Normalpreis. Das ist eine Ersparnis
+        von über 50&thinsp;%.
+      </p>
+
+      <h2>Swiss Travel Pass vs. Einzeltickets</h2>
+      <p>
+        Der <a href="https://www.sbb.ch/de/freizeit-ferien/reisen-schweiz/swiss-travel-pass.html" target="_blank" rel="noopener noreferrer">Swiss Travel Pass</a>
+        lohnt sich vor allem bei längeren Aufenthalten (ab ca. 6 Tagen) mit vielen Fahrten pro Tag.
+        Für kürzere Trips sind Spartageskarten + Halbtax fast immer günstiger.
+      </p>
+      <p>
+        Wichtig: <strong>Reservierungen sind im Swiss Travel Pass nicht enthalten.</strong> Wer den
+        Glacier Express oder Bernina Express nutzen will, zahlt die Reservation extra.
+      </p>
+
+      <div class="callout">
+        <p>
+          <strong>Reservierungen — wann Pflicht, wann optional?</strong>
+        </p>
+        <p style="margin-top: 0.5rem;">
+          <strong>Glacier Express:</strong> Pflicht (CHF&thinsp;54)<br>
+          <strong>Bernina Express:</strong> Pflicht (CHF&thinsp;32–36), ABER: Allegra-Regionalzüge haben 100+ freie Plätze ohne Reservation<br>
+          <strong>GoldenPass Express:</strong> Empfohlen (CHF&thinsp;20)<br>
+          <strong>Alle Regionalzüge:</strong> Nie nötig — einfach einsteigen
+        </p>
+      </div>
+
+      <h2>Regionale Pässe: Noch günstiger in bestimmten Regionen</h2>
+      <p>
+        Wer sich auf eine Region konzentriert, fährt mit einem regionalen Pass oft besser als mit
+        nationalen Tickets:
+      </p>
+      <ul>
+        <li><strong><a href="https://www.berneroberlandpass.ch/" target="_blank" rel="noopener noreferrer">Berner Oberland Pass</a></strong>
+          — ab CHF&thinsp;240 für 3 Tage (CHF&thinsp;168 mit Halbtax). Deckt die komplette GoldenPass-Strecke,
+          den Luzern-Interlaken Express, die Lötschberg-Bergstrecke, Schifffahrt auf Thuner- und Brienzersee
+          sowie zahlreiche Bergbahnen (Schilthorn, Männlichen, Niesen u.&thinsp;v.&thinsp;m.) ab.
+          25&thinsp;% Rabatt aufs Jungfraujoch.</li>
+        <li><strong><a href="https://www.tellpass.ch/de" target="_blank" rel="noopener noreferrer">Tell-Pass / Luzern Travel Pass</a></strong>
+          — ab CHF&thinsp;240 für 3 Tage (ab April 2026). Deckt die Zentralschweiz ab:
+          Pilatus, Rigi, Titlis, Vierwaldstättersee-Schiffe und den Gotthard Panorama Express
+          (Arth-Goldau–Göschenen + Schiff Luzern–Flüelen).</li>
+        <li><strong><a href="https://www.rhb.ch/de/regionaler-pass/graubuendenpass" target="_blank" rel="noopener noreferrer">Graubünden Pass</a></strong>
+          — ab CHF&thinsp;125 für 2 Tage (alle Zonen). Unbegrenzt RhB fahren, inklusive der kompletten
+          Bernina-Strecke und des Glacier-Express-Abschnitts in Graubünden (Chur–Disentis/St.&thinsp;Moritz).
+          Keine Reservation nötig auf Regionalzügen.</li>
+      </ul>
+      <div class="callout">
+        <p>
+          <strong>Tageskarten Gemeinde:</strong> Manche Schweizer Gemeinden verkaufen limitierte
+          Tageskarten ab CHF&thinsp;39 (mit Halbtax), die als GA-Tageskarte auf dem gesamten SBB-Netz
+          gelten — inklusive aller Panoramastrecken. Verfügbarkeit prüfen auf
+          <a href="https://www.spartageskarte-gemeinde.ch/de" target="_blank" rel="noopener noreferrer">spartageskarte-gemeinde.ch</a>.
+        </p>
+      </div>
+
+      <h2>Der Transit-Trick: Internationale Tickets durch die Schweiz</h2>
+      <p>
+        Schweizer Inlandstickets sind teuer — aber internationale Durchgangstickets, die zufällig
+        durch die Schweiz führen, unterliegen ganz anderen Tarifstrukturen. Das lässt sich ausnutzen.
+      </p>
+      <p>
+        Der Trick: Statt ein SBB-Inlandsticket zu kaufen, bucht man auf
+        <a href="https://int.bahn.de/de" target="_blank" rel="noopener noreferrer">bahn.de</a>
+        ein <strong>Sparpreis Europa</strong>-Ticket von einer deutschen Grenzstadt (z.&thinsp;B. Freiburg oder Singen) nach Italien.
+        Das Ticket gilt für die gesamte Strecke inklusive aller Schweizer Bahnhöfe dazwischen — man steigt
+        einfach dort ein und aus, wo man möchte.
+        <a href="https://www.seat61.com/train-travel-in-switzerland.htm" target="_blank" rel="noopener noreferrer">Seat&thinsp;61</a>
+        bestätigt ausdrücklich: Das ist völlig legitim.
+      </p>
+      <p>
+        Konkrete Preisbeispiele (Quelle: <a href="https://www.ktipp.ch/artikel/artikeldetail/bahnbillette-der-kluge-loest-ins-ausland" target="_blank" rel="noopener noreferrer">K-Tipp</a>):
+      </p>
+      <ul>
+        <li><strong>Basel–Brig</strong> (hin &amp; zurück): CHF&thinsp;166 bei SBB — vs. CHF&thinsp;48 als Basel–Milano via DB</li>
+        <li><strong>Zürich–Lugano:</strong> CHF&thinsp;144 bei SBB — vs. CHF&thinsp;48 als Zürich–Como via DB</li>
+        <li><strong>Basel–Genf:</strong> CHF&thinsp;75 bei SBB — vs. ca. €30 als Freiburg(DE)–Genf via DB</li>
+      </ul>
+      <p>
+        Die DB bietet <a href="https://www.bahn.de/angebot/sparpreis-flexpreis/super-sparpreis-europa-schweiz" target="_blank" rel="noopener noreferrer">Super Sparpreis Europa</a>-Tickets
+        in die Schweiz ab €19,99 an — buchbar bis zu 12 Monate im Voraus.
+        In Kombination mit einer <strong>BahnCard 25</strong> wird der deutsche Streckenanteil nochmals 25&thinsp;% günstiger.
+      </p>
+      <div class="callout">
+        <p>
+          <strong>Chiasso-Split:</strong> Wenn kein günstiges Durchgangsticket verfügbar ist, kann man
+          ein DB-Sparpreis bis <strong>Chiasso</strong> (Schweizer Grenzbahnhof zu Italien) buchen und von dort
+          den günstigen <strong>TILO-Regionalzug</strong> nach Milano nehmen — keine Reservation nötig, kein
+          Zugbindungsproblem bei Verspätungen.
+        </p>
+      </div>
+
+      <h2>Internationaler Tipp: Seat 61</h2>
+      <p>
+        Wer tiefer einsteigen will, findet auf
+        <a href="https://www.seat61.com/Switzerland.htm" target="_blank" rel="noopener noreferrer">Seat 61</a>
+        exzellente Detailinfos zu den Panoramastrecken — inklusive Wagentipps, bester Sitzseite und
+        Buchungsanleitungen. Besonders die Seiten zum
+        <a href="https://www.seat61.com/bernina-express.htm" target="_blank" rel="noopener noreferrer">Bernina Express</a>
+        und
+        <a href="https://www.seat61.com/glacier-express.htm" target="_blank" rel="noopener noreferrer">Glacier Express</a>
+        sind lesenswert.
+      </p>
+
+    </article>
+
+    <!-- EN -->
+    <article id="content-en" class="hidden">
+
+      <p class="intro">
+        Swiss panoramic trains are among the most spectacular rail journeys in the world — but the tickets
+        are often shockingly expensive. With a few tricks, you can enjoy the exact same views for a
+        fraction of the price.
+      </p>
+
+      <h2>The Panoramic Routes at a Glance</h2>
+      <p>
+        Switzerland has several famous
+        <a href="https://www.myswitzerland.com/en-ae/experiences/experience-tour/highlights-by-train-bus-and-boat/panoramic-routes/" target="_blank" rel="noopener noreferrer">panoramic routes</a>
+        that attract tourists from around the world:
+      </p>
+      <ul>
+        <li><strong>GoldenPass Express</strong> — Montreux–Interlaken</li>
+        <li><strong>Lucerne-Interlaken Express</strong> — Interlaken–Lucerne</li>
+        <li><strong>Gotthard Panorama Express</strong> — Lucerne–Lugano</li>
+        <li><strong>Bernina Express</strong> — Tirano–St.&thinsp;Moritz</li>
+        <li><strong>Glacier Express</strong> — St.&thinsp;Moritz–Zermatt</li>
+      </ul>
+      <p>
+        If you ride these routes in the order listed above, take the
+        <a href="https://www.myswitzerland.com/en/planning/offers/bernina-express-bus-ticket-from-lugano-or-tirano/" target="_blank" rel="noopener noreferrer">Bernina Express Bus</a>
+        between Lugano and Tirano, and return from Zermatt via the
+        <a href="https://www.myswitzerland.com/de-ch/erlebnisse/erlebnisfahrten/bahn-bus-schiff-grand-train-tour/grand-train-tour-of-switzerland/etappen-der-grand-train-tour/grand-train-tour-montreux-visp-zermatt/" target="_blank" rel="noopener noreferrer">Zermatt–Visp–Montreux route</a>,
+        you get the complete loop: the
+        <strong>Grand Train Tour of Switzerland</strong> — rideable in both directions.
+      </p>
+
+      <h2>Understanding the Pricing System</h2>
+      <p>
+        Swiss panoramic train prices always consist of two parts:
+        the <strong>ticket</strong> (point-to-point ticket, day pass, or travel pass) and the
+        <strong>seat reservation</strong>. Both are paid separately. The ticket entitles you to
+        travel the route, the reservation secures a seat in the panoramic coach.
+        Without a valid ticket, the reservation is useless — and without a reservation,
+        some trains (e.g. Glacier Express) won't let you board at all.
+      </p>
+      <p>
+        This gives you two ways to save: First, you can cut the <strong>ticket cost</strong>
+        by using cheap day passes, regional passes, or saver deals instead of expensive
+        point-to-point tickets. Second, you can <strong>avoid the reservation fee entirely</strong>
+        by taking regional trains that run the same routes without requiring a reservation.
+      </p>
+
+      <h2>Trick 1: Regional Trains on the Same Tracks</h2>
+      <p>
+        The single best money-saving tip: the famous panoramic routes aren't only served by the expensive
+        panoramic trains — regular regional trains run on the exact same tracks, with the same views.
+        The panoramic coaches do have larger windows, but regional trains often let you open the windows instead.
+      </p>
+      <p>
+        Best example: The <strong>Bernina route</strong> (Tirano–St.&thinsp;Moritz) is served hourly
+        by RhB regional trains (Allegra railcars) — no changing, no reservation needed, and you can
+        even open the windows. Other panoramic routes like the Glacier Express or GoldenPass also have
+        regional train alternatives, though these often require several changes along the way.
+      </p>
+
+      <h2>The Halbtax Card</h2>
+      <p>
+        The Swiss Halbtax (half-fare) card is pure gold: 50% off nearly all trains, buses, and boats
+        in Switzerland. For tourists, there's the
+        <a href="https://www.sbb.ch/en/tickets-offers/subscriptions/half-fare-travelcard.html" target="_blank" rel="noopener noreferrer"><strong>Swiss Half Fare Card</strong></a>
+        as a monthly variant for CHF&thinsp;150 (only for residents outside CH/FL).
+        Swiss residents pay CHF&thinsp;185 for the <strong>annual subscription</strong>. It combines
+        perfectly with other discount offers.
+      </p>
+      <p>
+        The best combo: <strong>Halbtax + Saver Day Pass from CHF&thinsp;29 per day</strong> — unlimited
+        travel across Switzerland for a whole day. Book the Saver Day Pass early for the best prices.
+      </p>
+
+      <h2>SBB Saver Day Pass & Supersaver Tickets</h2>
+      <p>
+        The <a href="https://www.sbb.ch/en/leisure-holidays/travel-in-switzerland/saver-day-pass.html" target="_blank" rel="noopener noreferrer">Saver Day Pass</a>
+        is Switzerland's answer to unlimited daily travel: one day, unlimited rides,
+        from CHF&thinsp;52 (from CHF&thinsp;29 with Halbtax).
+      </p>
+      <p>
+        There are also <a href="https://www.sbb.ch/en/buying/pages/offer/supersaver.xhtml" target="_blank" rel="noopener noreferrer">Supersaver tickets</a>:
+        15–50% off point-to-point tickets, with bigger discounts the earlier you book.
+      </p>
+      <p>
+        <strong>Example — Glacier Express:</strong> Saver Day Pass CHF&thinsp;52 + reservation
+        CHF&thinsp;54 = CHF&thinsp;106 — instead of CHF&thinsp;213 at the regular price. That's over
+        50% savings.
+      </p>
+
+      <h2>Swiss Travel Pass vs. Individual Tickets</h2>
+      <p>
+        The <a href="https://www.sbb.ch/en/leisure-holidays/travel-in-switzerland/swiss-travel-pass.html" target="_blank" rel="noopener noreferrer">Swiss Travel Pass</a>
+        mainly pays off for longer stays (around 6+ days) with many trips per day.
+        For shorter visits, Saver Day Passes + Halbtax are almost always cheaper.
+      </p>
+      <p>
+        Important: <strong>Reservations are not included in the Swiss Travel Pass.</strong> If you want
+        to ride the Glacier Express or Bernina Express, you'll pay the reservation fee on top.
+      </p>
+
+      <div class="callout">
+        <p>
+          <strong>Reservations — when mandatory, when optional?</strong>
+        </p>
+        <p style="margin-top: 0.5rem;">
+          <strong>Glacier Express:</strong> Mandatory (CHF&thinsp;54)<br>
+          <strong>Bernina Express:</strong> Mandatory (CHF&thinsp;32–36), BUT: Allegra regional trains have 100+ free seats without reservation<br>
+          <strong>GoldenPass Express:</strong> Recommended (CHF&thinsp;20)<br>
+          <strong>All regional trains:</strong> Never needed — just hop on
+        </p>
+      </div>
+
+      <h2>Regional Passes: Even Cheaper in Specific Areas</h2>
+      <p>
+        If you're focusing on one region, a regional pass often beats national tickets:
+      </p>
+      <ul>
+        <li><strong><a href="https://www.berneroberlandpass.ch/" target="_blank" rel="noopener noreferrer">Berner Oberland Pass</a></strong>
+          — from CHF&thinsp;240 for 3 days (CHF&thinsp;168 with Halbtax). Covers the entire GoldenPass
+          route, Lucerne-Interlaken Express, Lötschberg mountain line, Lake Thun &amp; Lake Brienz boats,
+          and numerous mountain railways (Schilthorn, Männlichen, Niesen and more).
+          25% off Jungfraujoch.</li>
+        <li><strong><a href="https://www.tellpass.ch/en" target="_blank" rel="noopener noreferrer">Tell-Pass / Lucerne Travel Pass</a></strong>
+          — from CHF&thinsp;240 for 3 days (from April 2026). Covers Central Switzerland:
+          Pilatus, Rigi, Titlis, Lake Lucerne boats, and the Gotthard Panorama Express
+          (Arth-Goldau–Göschenen + boat Lucerne–Flüelen).</li>
+        <li><strong><a href="https://www.rhb.ch/en/regional-passes/graubuendenpass/" target="_blank" rel="noopener noreferrer">Graubünden Pass</a></strong>
+          — from CHF&thinsp;125 for 2 days (all zones). Unlimited RhB travel, including the entire
+          Bernina route and the Glacier Express section within Graubünden (Chur–Disentis/St.&thinsp;Moritz).
+          No reservation needed on regional trains.</li>
+      </ul>
+      <div class="callout">
+        <p>
+          <strong>Tageskarten Gemeinde:</strong> Some Swiss municipalities sell limited day passes from
+          CHF&thinsp;39 (with Halbtax) that work as a GA day pass on the entire SBB network — including
+          all panoramic routes. Check availability at
+          <a href="https://www.spartageskarte-gemeinde.ch/de" target="_blank" rel="noopener noreferrer">spartageskarte-gemeinde.ch</a>.
+        </p>
+      </div>
+
+      <h2>The Transit Trick: International Tickets Through Switzerland</h2>
+      <p>
+        Swiss domestic tickets are expensive — but international through-tickets that happen to pass
+        through Switzerland are subject to completely different tariff structures. You can exploit this.
+      </p>
+      <p>
+        The trick: instead of buying an SBB domestic ticket, book a
+        <strong>Sparpreis Europa</strong> ticket on
+        <a href="https://int.bahn.de/en" target="_blank" rel="noopener noreferrer">bahn.de</a>
+        from a German border town (e.g. Freiburg or Singen) to Italy.
+        The ticket covers the entire route including all Swiss stations in between — just board and
+        alight wherever you like.
+        <a href="https://www.seat61.com/train-travel-in-switzerland.htm" target="_blank" rel="noopener noreferrer">Seat&thinsp;61</a>
+        explicitly confirms: this is perfectly legitimate.
+      </p>
+      <p>
+        Concrete price examples (source: <a href="https://www.ktipp.ch/artikel/artikeldetail/bahnbillette-der-kluge-loest-ins-ausland" target="_blank" rel="noopener noreferrer">K-Tipp</a>):
+      </p>
+      <ul>
+        <li><strong>Basel–Brig</strong> (return): CHF&thinsp;166 on SBB — vs. CHF&thinsp;48 as Basel–Milan via DB</li>
+        <li><strong>Zurich–Lugano:</strong> CHF&thinsp;144 on SBB — vs. CHF&thinsp;48 as Zurich–Como via DB</li>
+        <li><strong>Basel–Geneva:</strong> CHF&thinsp;75 on SBB — vs. approx. €30 as Freiburg(DE)–Geneva via DB</li>
+      </ul>
+      <p>
+        DB offers <a href="https://www.bahn.de/angebot/sparpreis-flexpreis/super-sparpreis-europa-schweiz" target="_blank" rel="noopener noreferrer">Super Sparpreis Europa</a> tickets
+        to Switzerland from €19.99 — bookable up to 12 months in advance.
+        Combined with a <strong>BahnCard 25</strong>, the German leg gets another 25% off.
+      </p>
+      <div class="callout">
+        <p>
+          <strong>Chiasso Split:</strong> If no cheap through-ticket is available, book a DB Sparpreis to
+          <strong>Chiasso</strong> (Swiss border station to Italy) and take the cheap
+          <strong>TILO regional train</strong> from there to Milan — no reservation needed, no
+          train-binding issues if your first train is delayed.
+        </p>
+      </div>
+
+      <h2>International Tip: Seat 61</h2>
+      <p>
+        For deeper research,
+        <a href="https://www.seat61.com/Switzerland.htm" target="_blank" rel="noopener noreferrer">Seat 61</a>
+        has excellent detail on the panoramic routes — including carriage tips, best side to sit on,
+        and booking guides. The pages on the
+        <a href="https://www.seat61.com/bernina-express.htm" target="_blank" rel="noopener noreferrer">Bernina Express</a>
+        and
+        <a href="https://www.seat61.com/glacier-express.htm" target="_blank" rel="noopener noreferrer">Glacier Express</a>
+        are especially worth reading.
+      </p>
+
+    </article>
+
+  </div>
+
+  <script>
+    function toggleLang() {
+      var toggle = document.getElementById('lang-toggle');
+      var isDE = !toggle.classList.contains('en');
+
+      toggle.classList.toggle('en', isDE);
+      document.getElementById('label-de').classList.toggle('active', !isDE);
+      document.getElementById('label-en').classList.toggle('active', isDE);
+
+      document.getElementById('content-de').classList.toggle('hidden', isDE);
+      document.getElementById('content-en').classList.toggle('hidden', !isDE);
+      document.getElementById('title-de').classList.toggle('hidden', isDE);
+      document.getElementById('title-en').classList.toggle('hidden', !isDE);
+      document.getElementById('meta-de').classList.toggle('hidden', isDE);
+      document.getElementById('meta-en').classList.toggle('hidden', !isDE);
+
+      document.documentElement.lang = isDE ? 'en' : 'de';
+    }
+
+    function calcReadingTime() {
+      var wpmDe = 200, wpmEn = 238;
+      var deTxt = document.getElementById('content-de').textContent;
+      var enTxt = document.getElementById('content-en').textContent;
+      var deWords = deTxt.trim().split(/\s+/).length;
+      var enWords = enTxt.trim().split(/\s+/).length;
+      var deMin = Math.max(1, Math.round(deWords / wpmDe));
+      var enMin = Math.max(1, Math.round(enWords / wpmEn));
+      document.getElementById('reading-time-de').textContent = deMin + ' min Lesezeit';
+      document.getElementById('reading-time-en').textContent = enMin + ' min read';
+    }
+    calcReadingTime();
+
+    document.getElementById('lang-toggle').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleLang();
+      }
+    });
+  </script>
+</body>
+</html>
